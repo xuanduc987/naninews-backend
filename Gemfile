@@ -16,7 +16,11 @@ group :development, :test do
 end
 gem 'shoulda-matchers', '~> 3.0', :group => "test"
 
-gem 'pry-rails', :group => :development
+group :development do
+  gem 'pry-rails'
+  gem 'rubocop', require: false
+  gem 'rubocop-rspec', require: false
+end
 # To use Jbuilder templates for JSON
 # gem 'jbuilder'
 

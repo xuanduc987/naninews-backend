@@ -1,0 +1,10 @@
+{
+  "linters": {
+    "rubocop": {
+      "type": "rubocop",
+      "include": ["(\\.rb$)", "(\\.rake$)", "(Rakefile)", "(config\\.ru)"],
+      "exclude": ["(db/)", "(config/)", "(script/)", "(bin/)"],
+      "rubocop.config": ".rubocop.yml"
+    }
+  }
+}
