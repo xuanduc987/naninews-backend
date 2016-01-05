@@ -28,7 +28,7 @@ ActiveRecord::Migration.maintain_test_schema!
 
 RSpec.configure do |config|
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
-  config.fixture_path = "#{::Rails.root}/spec/fixtures"
+  # config.fixture_path = "#{::Rails.root}/spec/fixtures"
 
   # If you're not using ActiveRecord, or you'd prefer not to run each of your
   # examples within a transaction, remove the following line or assign false
@@ -63,6 +63,6 @@ Shoulda::Matchers.configure do |config|
     # Choose one or more libraries:
     # with.library :active_record
     with.library :active_model
-    # with.library :action_controller
+    with.library :action_controller
   end
 end

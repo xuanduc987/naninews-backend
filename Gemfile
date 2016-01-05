@@ -11,10 +11,15 @@ gem 'mysql2'
 # To use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.7'
 
+gem 'action_args'
+gem 'active_model_serializers'
+
 group :development, :test do
   gem 'rspec-rails', '~> 3.0'
 end
-gem 'shoulda-matchers', '~> 3.0', :group => "test"
+group :test do
+  gem 'shoulda-matchers', '~> 3.0'
+end
 
 group :development do
   gem 'pry-rails'
