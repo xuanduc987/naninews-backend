@@ -1,0 +1,6 @@
+{
+  "load": [
+    ".arcanist-extensions/rspec_test_engine"
+  ],
+  "unit.engine": "RSpecTestEngine"
+}
