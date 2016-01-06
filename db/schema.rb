@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160105020647) do
+ActiveRecord::Schema.define(version: 20160105065946) do
 
   create_table "api_tokens", force: :cascade do |t|
     t.integer  "user_id",    limit: 4
@@ -22,6 +22,19 @@ ActiveRecord::Schema.define(version: 20160105020647) do
 
   add_index "api_tokens", ["token"], name: "index_api_tokens_on_token", unique: true, using: :btree
   add_index "api_tokens", ["user_id"], name: "index_api_tokens_on_user_id", using: :btree
+
+  create_table "posts", force: :cascade do |t|
+    t.string   "url",        limit: 255
+    t.string   "slug",       limit: 255
+    t.string   "title",      limit: 255
+    t.integer  "user_id",    limit: 4
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
+  add_index "posts", ["slug"], name: "index_posts_on_slug", unique: true, using: :btree
+  add_index "posts", ["url"], name: "index_posts_on_url", unique: true, using: :btree
+  add_index "posts", ["user_id"], name: "index_posts_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "name",            limit: 255
@@ -34,4 +47,5 @@ ActiveRecord::Schema.define(version: 20160105020647) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
 
   add_foreign_key "api_tokens", "users"
+  add_foreign_key "posts", "users"
 end
