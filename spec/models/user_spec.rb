@@ -31,4 +31,33 @@ RSpec.describe User, type: :model do
       end
     end
   end
+
+  describe ".destroy" do
+    let(:user) { create :user }
+    let(:subject) { user.destroy }
+
+    context "when user has some posts" do
+      before(:each) { create_list :post, 3, user: user }
+
+      it "destroys all their posts" do
+        expect { subject }.to change { user.posts.count }.to(0)
+      end
+    end
+
+    context "when user has some votes" do
+      before(:each) { create_list :vote, 3, user: user }
+
+      it "destroys all their votes" do
+        expect { subject }.to change { user.votes.count }.to(0)
+      end
+    end
+
+    context "when user has some api_tokens" do
+      before(:each) { create_list :api_token, 3, user: user }
+
+      it "destroys all their api_tokens" do
+        expect { subject }.to change { user.api_tokens.count }.to(0)
+      end
+    end
+  end
 end

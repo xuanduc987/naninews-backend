@@ -49,8 +49,12 @@ RSpec.describe "Posts", type: :request do
 
     context "when there is a post with provided id" do
       let(:post) { create :post }
+      let(:token) { nil }
 
-      before(:each) { get "/posts/#{post.id}" }
+      before(:each) do
+        get "/posts/#{post.id}", nil,
+          authorization: ActionController::HttpAuthentication::Token.encode_credentials(token)
+      end
 
       it "responses with HTTP 200 status code" do
         expect(response).to be_success
@@ -59,6 +63,21 @@ RSpec.describe "Posts", type: :request do
 
       it "return that post" do
         expect(body["post"]["id"]).to eql(post.id)
+      end
+
+      context "when token is valid" do
+        let(:token) { create(:api_token, user: current_user).token }
+
+        context "when current user had voted for that post" do
+          let(:current_user) do
+            create(:user).tap { |user| user.vote_for post }
+          end
+          before(:each) { current_user.vote_for post }
+
+          it "returns post with voted field is true" do
+            expect(body["post"]["voted"]).to be true
+          end
+        end
       end
     end
   end

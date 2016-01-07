@@ -21,4 +21,17 @@ RSpec.describe Post, type: :model do
 
     it { should be_invalid }
   end
+
+  describe ".destroy" do
+    let(:post) { create :post }
+    let(:subject) { post.destroy }
+
+    context "when post has some votes" do
+      before(:each) { create_list :vote, 3, post: post }
+
+      it "destroys all its votes" do
+        expect { subject }.to change { post.votes.count }.to(0)
+      end
+    end
+  end
 end

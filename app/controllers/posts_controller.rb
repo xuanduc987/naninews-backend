@@ -25,7 +25,7 @@ class PostsController < ApplicationController
   # POST /posts
   # POST /posts.json
   def create
-    @post = @user.posts.build(post_params)
+    @post = @current_user.posts.build(post_params)
 
     if @post.save
       render json: @post, status: :created, location: @post
@@ -37,7 +37,7 @@ class PostsController < ApplicationController
   # PATCH/PUT /posts/1
   # PATCH/PUT /posts/1.json
   def update
-    @post = @user.posts.find_by(id: params[:id])
+    @post = @current_user.posts.find_by(id: params[:id])
 
     if @post && @post.update_attributes(post_params.merge(slug: ""))
       head :no_content
@@ -49,7 +49,7 @@ class PostsController < ApplicationController
   # DELETE /posts/1
   # DELETE /posts/1.json
   def destroy
-    @post = @user.posts.find_by(id: params[:id])
+    @post = @current_user.posts.find_by(id: params[:id])
 
     if @post
       @post.destroy

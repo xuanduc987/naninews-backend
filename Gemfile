@@ -11,6 +11,8 @@ gem 'mysql2'
 # To use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.7'
 
+gem 'counter_culture', '~> 0.1.33'
+
 gem 'action_args'
 gem 'active_model_serializers'
 
