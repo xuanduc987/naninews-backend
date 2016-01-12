@@ -59,5 +59,13 @@ RSpec.describe User, type: :model do
         expect { subject }.to change { user.api_tokens.count }.to(0)
       end
     end
+
+    context "when user has some comments" do
+      before(:each) { create_list :comment, 3, user: user }
+
+      it "destroys all their comments" do
+        expect { subject }.to change { user.comments.count }.to(0)
+      end
+    end
   end
 end

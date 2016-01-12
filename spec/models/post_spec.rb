@@ -33,5 +33,13 @@ RSpec.describe Post, type: :model do
         expect { subject }.to change { post.votes.count }.to(0)
       end
     end
+
+    context "when post has some comments" do
+      before(:each) { create_list :comment, 3, post: post }
+
+      it "destroys all its comments" do
+        expect { subject }.to change { post.comments.count }.to(0)
+      end
+    end
   end
 end

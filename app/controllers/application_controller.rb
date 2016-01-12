@@ -14,6 +14,14 @@ class ApplicationController < ActionController::API
     end
   end
 
+  def render_json_or_404(content, options = {})
+    if content
+      render({ json: content }.merge(options))
+    else
+      head :not_found
+    end
+  end
+
   private
 
   def set_current_user

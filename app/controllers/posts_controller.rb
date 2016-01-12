@@ -19,7 +19,7 @@ class PostsController < ApplicationController
   # GET /posts/1
   # GET /posts/1.json
   def show
-    render_json_or_404 @post
+    render_json_or_404 @post, serializer: PostDetailSerializer, root: "post"
   end
 
   # POST /posts
@@ -68,13 +68,5 @@ class PostsController < ApplicationController
 
   def post_params
     params[:post] ? params[:post].permit(:url, :title) : {}
-  end
-
-  def render_json_or_404(content)
-    if content
-      render json: content
-    else
-      head :not_found
-    end
   end
 end
